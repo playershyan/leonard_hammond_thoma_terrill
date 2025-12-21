@@ -8,12 +8,12 @@
 
 ## 📊 Progress Tracker
 
-**Overall Progress:** Phase 1 Complete, Phase 2 In Progress (3/8 tasks done)
+**Overall Progress:** Phase 1 Complete, Phase 2 Nearly Complete (6/8 tasks done)
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
 | **Phase 1: Project Foundation** | ✅ **COMPLETE** | 7/7 | Next.js setup, Tailwind, ESLint, dependencies installed |
-| **Phase 2: Database & Authentication** | 🔄 **IN PROGRESS** | 3/8 | Drizzle configured, schema defined, seed script created |
+| **Phase 2: Database & Authentication** | 🔄 **IN PROGRESS** | 6/8 | Auth system complete, awaiting Supabase setup |
 | **Phase 3: Core UI Components** | ⏳ Pending | 0/6 | Depends on Phase 1 |
 | **Phase 4: Public Website - Static Pages** | ⏳ Pending | 0/10 | Depends on Phase 1 & 3 |
 | **Phase 5: Admin Dashboard - Core** | ⏳ Pending | 0/7 | Depends on Phase 2 & 3 |
@@ -25,6 +25,9 @@
 | **Phase 11: Content & Launch** | ⏳ Pending | 0/4 | Depends on Phase 10 |
 
 ### ✅ Completed Tasks (Latest First)
+- **2025-12-21:** TASK-015 - Created logout API route (POST /api/auth/logout)
+- **2025-12-21:** TASK-014 - Created login API route with credential validation (POST /api/auth/login)
+- **2025-12-21:** TASK-013 - Created authentication utilities (session, password, validation)
 - **2025-12-21:** TASK-012 - Created default admin user seed script (username: admin, password: admin123)
 - **2025-12-21:** TASK-010 - Defined database schema for users and blog_posts with TypeScript types
 - **2025-12-21:** TASK-009 - Configured Drizzle ORM with PostgreSQL client and scripts

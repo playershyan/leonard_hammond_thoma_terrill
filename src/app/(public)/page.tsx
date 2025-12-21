@@ -1,8 +1,25 @@
+import { Hero } from '@/components/home/Hero'
+import { PracticeAreas } from '@/components/home/PracticeAreas'
+import { WhyChooseUs } from '@/components/home/WhyChooseUs'
+import { Testimonials } from '@/components/home/Testimonials'
+import { BlogPreview } from '@/components/home/BlogPreview'
+import { CTASection } from '@/components/ui/CTASection'
+
+export const metadata = {
+  title: 'Law Firm Name | Fort Wayne Divorce, Personal Injury & Criminal Defense Attorneys',
+  description:
+    'Trusted Fort Wayne law firm specializing in divorce & family law, personal injury, and criminal defense. Free consultations. Call (260) 555-0100.',
+}
+
 export default function HomePage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-heading font-bold text-primary mb-4">Law Firm Website</h1>
-      <p className="text-lg text-text-light">Coming soon...</p>
-    </div>
+    <>
+      <Hero />
+      <PracticeAreas />
+      <WhyChooseUs />
+      <Testimonials />
+      <BlogPreview />
+      <CTASection />
+    </>
   )
 }

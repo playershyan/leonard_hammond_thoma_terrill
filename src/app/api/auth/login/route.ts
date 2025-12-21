@@ -11,18 +11,11 @@ export async function POST(request: NextRequest) {
 
     // Validate input
     if (!username || !password) {
-      return NextResponse.json(
-        { error: 'Username and password required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Username and password required' }, { status: 400 })
     }
 
     // Find user
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.username, username))
-      .limit(1)
+    const [user] = await db.select().from(users).where(eq(users.username, username)).limit(1)
 
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })

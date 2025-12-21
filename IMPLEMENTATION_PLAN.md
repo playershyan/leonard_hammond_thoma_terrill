@@ -8,12 +8,12 @@
 
 ## 📊 Progress Tracker
 
-**Overall Progress:** Phase 1 Complete (7 of 11 phases remaining)
+**Overall Progress:** Phase 1 Complete, Phase 2 In Progress (3/8 tasks done)
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
 | **Phase 1: Project Foundation** | ✅ **COMPLETE** | 7/7 | Next.js setup, Tailwind, ESLint, dependencies installed |
-| **Phase 2: Database & Authentication** | ⏳ Pending | 0/8 | Next: Set up Supabase |
+| **Phase 2: Database & Authentication** | 🔄 **IN PROGRESS** | 3/8 | Drizzle configured, schema defined, seed script created |
 | **Phase 3: Core UI Components** | ⏳ Pending | 0/6 | Depends on Phase 1 |
 | **Phase 4: Public Website - Static Pages** | ⏳ Pending | 0/10 | Depends on Phase 1 & 3 |
 | **Phase 5: Admin Dashboard - Core** | ⏳ Pending | 0/7 | Depends on Phase 2 & 3 |
@@ -25,6 +25,9 @@
 | **Phase 11: Content & Launch** | ⏳ Pending | 0/4 | Depends on Phase 10 |
 
 ### ✅ Completed Tasks (Latest First)
+- **2025-12-21:** TASK-012 - Created default admin user seed script (username: admin, password: admin123)
+- **2025-12-21:** TASK-010 - Defined database schema for users and blog_posts with TypeScript types
+- **2025-12-21:** TASK-009 - Configured Drizzle ORM with PostgreSQL client and scripts
 - **2025-12-21:** TASK-007 - Installed all core dependencies (UI, forms, auth, database, email)
 - **2025-12-21:** TASK-005 - Initialized Git repository and created initial commit
 - **2025-12-21:** TASK-004 - Configured ESLint and Prettier
@@ -32,8 +35,10 @@
 - **2025-12-21:** TASK-002 - Set up project folder structure and utilities
 - **2025-12-21:** TASK-001 - Initialized Next.js 16 with TypeScript and App Router
 
-### ⚠️ Deferred Tasks
+### ⚠️ Blocked/Deferred Tasks
 - **TASK-006:** Set up Vercel project (requires manual Vercel account setup)
+- **TASK-008:** Set up Supabase project (requires manual account creation - get DATABASE_URL)
+- **TASK-011:** Create and run migrations (blocked by TASK-008 - needs DATABASE_URL)
 
 ---
 

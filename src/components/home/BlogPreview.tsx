@@ -1,37 +1,52 @@
 import { Section, SectionTitle, Button } from '@/components/ui'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar } from 'lucide-react'
+import { db } from '@/lib/db/client'
+import { blogPosts } from '@/lib/db/schema'
+import { eq, desc } from 'drizzle-orm'
 
-export function BlogPreview() {
-  // Placeholder data - will be replaced with database fetch
-  const posts = [
-    {
-      title: 'Understanding the Divorce Process in Indiana',
-      excerpt:
-        'Learn about the steps involved in filing for divorce in Fort Wayne and what to expect during proceedings...',
-      date: '2025-01-15',
-      slug: 'understanding-divorce-process',
-    },
-    {
-      title: 'What to Do After a Car Accident',
-      excerpt:
-        'Essential steps to protect your rights and maximize compensation after being injured in an auto accident...',
-      date: '2025-01-10',
-      slug: 'what-to-do-after-car-accident',
-    },
-    {
-      title: 'Your Rights During a Police Stop',
-      excerpt:
-        'Know your constitutional rights when stopped by law enforcement and how to protect yourself...',
-      date: '2025-01-05',
-      slug: 'rights-during-police-stop',
-    },
-  ]
+async function getRecentPosts() {
+  try {
+    const posts = await db
+      .select()
+      .from(blogPosts)
+      .where(eq(blogPosts.status, 'published'))
+      .orderBy(desc(blogPosts.publishedAt))
+      .limit(3)
+
+    return posts
+  } catch (error) {
+    console.error('Error fetching recent blog posts:', error)
+    return []
+  }
+}
+
+export async function BlogPreview() {
+  const posts = await getRecentPosts()
+
+  // If no posts, show a message
+  if (posts.length === 0) {
+    return (
+      <Section variant="gray">
+        <SectionTitle>Latest News & Insights</SectionTitle>
+        <p className="text-center text-text-light mb-12">
+          Stay informed with our expert legal blogs
+        </p>
+        <div className="text-center py-12">
+          <p className="text-text-light mb-6">No blog posts available yet.</p>
+          <p className="text-sm text-text-light">Check back soon for legal insights and updates!</p>
+        </div>
+      </Section>
+    )
+  }
 
   return (
     <Section variant="gray">
       <SectionTitle>Latest News & Insights</SectionTitle>
-      <p className="text-center text-text-light mb-12">Stay informed with our expert blogs</p>
+      <p className="text-center text-text-light mb-12">
+        Stay informed with our expert legal blogs
+      </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {posts.map((post) => (
@@ -40,14 +55,35 @@ export function BlogPreview() {
             href={`/blog/${post.slug}`}
             className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="h-48 bg-gray-300"></div>
+            <div className="relative h-48 bg-gray-200">
+              {post.featuredImageUrl && (
+                <Image
+                  src={post.featuredImageUrl}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              )}
+            </div>
             <div className="p-6">
-              <div className="flex items-center gap-2 text-sm text-text-light mb-3">
-                <Calendar className="w-4 h-4" />
-                <time>{new Date(post.date).toLocaleDateString()}</time>
-              </div>
-              <h3 className="text-xl font-semibold text-primary mb-2">{post.title}</h3>
-              <p className="text-text-light text-sm mb-4">{post.excerpt}</p>
+              {post.publishedAt && (
+                <div className="flex items-center gap-2 text-sm text-text-light mb-3">
+                  <Calendar className="w-4 h-4" />
+                  <time dateTime={post.publishedAt.toISOString()}>
+                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </time>
+                </div>
+              )}
+              <h3 className="text-xl font-semibold text-primary mb-2 line-clamp-2">
+                {post.title}
+              </h3>
+              {post.excerpt && (
+                <p className="text-text-light text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+              )}
               <span className="text-primary font-semibold">Read More →</span>
             </div>
           </Link>

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { LayoutDashboard, FileText, Users, LogOut } from 'lucide-react'
+import { LayoutDashboard, FileText, Users, LogOut, User } from 'lucide-react'
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -12,6 +12,7 @@ export function Sidebar() {
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
     { name: 'Blog Posts', href: '/admin/blog', icon: FileText },
     { name: 'Users', href: '/admin/users', icon: Users },
+    { name: 'My Profile', href: '/admin/profile', icon: User },
   ]
 
   return (

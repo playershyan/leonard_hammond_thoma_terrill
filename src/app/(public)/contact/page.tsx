@@ -1,5 +1,6 @@
 import { Section, SectionTitle } from '@/components/ui'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { ContactForm } from '@/components/forms/ContactForm'
 
 export const metadata = {
   title: 'Contact Us | Law Firm Name - Fort Wayne Attorneys',
@@ -75,10 +76,8 @@ export default function ContactPage() {
               Fill out the form below and we'll get back to you within 24 hours. For immediate
               assistance, please call us at (260) 555-0100.
             </p>
-            <div className="bg-white p-8 rounded-lg border border-gray-200">
-              <p className="text-center text-text-light">
-                Contact form will be implemented in Phase 8
-              </p>
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+              <ContactForm />
             </div>
           </div>
 

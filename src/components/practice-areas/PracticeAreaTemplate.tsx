@@ -48,9 +48,7 @@ export function PracticeAreaTemplate({
       {/* Hero */}
       <section className="bg-primary text-white py-16">
         <div className="container mx-auto px-4">
-          <nav className="text-sm mb-4 text-white/70">
-            Home &gt; Practice Areas &gt; {title}
-          </nav>
+          <nav className="text-sm mb-4 text-white/70">Home &gt; Practice Areas &gt; {title}</nav>
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">{title}</h1>
           <p className="text-xl text-white/90">{subtitle}</p>
         </div>

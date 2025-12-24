@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, ArrowLeft, ArrowRight } from 'lucide-react'
 import { Container, Button } from '@/components/ui'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 import type { Metadata } from 'next'
 
 async function getBlogPost(slug: string) {
@@ -76,7 +78,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const relatedPosts = await getRelatedPosts(post.id)
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <Header />
+      <div className="min-h-screen bg-white">
       {/* Back to Blog Link */}
       <div className="bg-background-gray border-b">
         <Container className="py-4">
@@ -210,6 +214,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </Container>
         </div>
       )}
-    </div>
+      </div>
+      <Footer />
+    </>
   )
 }

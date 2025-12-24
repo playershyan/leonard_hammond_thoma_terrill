@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 const POSTS_PER_PAGE = 9
 
@@ -53,21 +55,23 @@ export default async function BlogPage({
   const { posts, totalPages, totalPosts } = await getBlogPosts(currentPage)
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Section */}
-      <div className="bg-primary text-white py-16">
-        <Container>
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Legal Blog & Insights
-          </h1>
-          <p className="text-xl text-white/90 max-w-2xl">
-            Expert legal insights, news, and updates from Leonard, Hammond, Thoma & Terrill
-          </p>
-        </Container>
-      </div>
+    <>
+      <Header />
+      <div className="min-h-screen bg-white">
+        {/* Hero Section */}
+        <div className="bg-primary text-white py-16">
+          <Container>
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Legal Blog & Insights
+            </h1>
+            <p className="text-xl text-white/90 max-w-2xl">
+              Expert legal insights, news, and updates from Leonard, Hammond, Thoma & Terrill
+            </p>
+          </Container>
+        </div>
 
-      {/* Blog Posts Grid */}
-      <Container className="py-16">
+        {/* Blog Posts Grid */}
+        <Container className="py-16">
         {posts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-xl text-text-light">No blog posts available yet.</p>
@@ -181,7 +185,9 @@ export default async function BlogPage({
             </p>
           </>
         )}
-      </Container>
-    </div>
+        </Container>
+      </div>
+      <Footer />
+    </>
   )
 }

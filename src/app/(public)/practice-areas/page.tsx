@@ -1,6 +1,4 @@
 import Link from 'next/link'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
 import { Container, Section, SectionTitle } from '@/components/ui'
 import { Scale, Users, ShieldCheck, ArrowRight } from 'lucide-react'
 
@@ -64,8 +62,6 @@ export default function PracticeAreasPage() {
 
   return (
     <>
-      <Header />
-
       {/* Hero Section */}
       <section className="bg-primary text-white py-16">
         <Container>
@@ -233,8 +229,6 @@ export default function PracticeAreasPage() {
           </div>
         </div>
       </Section>
-
-      <Footer />
     </>
   )
 }

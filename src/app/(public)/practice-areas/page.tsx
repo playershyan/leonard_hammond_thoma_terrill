@@ -75,7 +75,7 @@ export default function PracticeAreasPage() {
       </section>
 
       {/* Practice Areas Grid */}
-      <Section>
+      <Section variant="gray">
         <div className="text-center mb-12">
           <SectionTitle>Areas of Legal Expertise</SectionTitle>
           <p className="text-xl text-text-light max-w-3xl mx-auto">

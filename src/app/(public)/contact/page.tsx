@@ -91,8 +91,8 @@ export default function ContactPage() {
             <div className="rounded-lg overflow-hidden">
               {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
                 <LazyGoogleMap
-                  center={{ lat: 41.079301164909324, lng: -85.13973198727524 }}
-                  zoom={15}
+                  center={{ lat: 41.07915, lng: -85.139758 }}
+                  zoom={19}
                   mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}
                   height="400px"
                   markerTitle="Leonard, Hammond, Thoma & Terrill - Law Office"
@@ -108,6 +108,19 @@ export default function ContactPage() {
                   </div>
                 </div>
               )}
+            </div>
+
+            {/* Get Directions Link */}
+            <div className="mt-4">
+              <a
+                href="https://www.google.com/maps?ll=41.07915,-85.139758&z=19.778207555915408&t=m&hl=en-US&gl=US&mapclient=apiv3&cid=8341129817241693912"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-semibold transition-colors"
+              >
+                <MapPin className="w-5 h-5" />
+                Get Directions in Google Maps
+              </a>
             </div>
           </div>
         </div>

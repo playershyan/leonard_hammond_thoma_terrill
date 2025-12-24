@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button, Input, Label } from '@/components/ui'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function NewUserPage() {
@@ -15,6 +15,25 @@ export default function NewUserPage() {
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [authChecking, setAuthChecking] = useState(true)
+
+  useEffect(() => {
+    // Check authentication
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me')
+        if (!response.ok) {
+          router.push('/admin/login')
+          return
+        }
+        setAuthChecking(false)
+      } catch (err) {
+        router.push('/admin/login')
+      }
+    }
+
+    checkAuth()
+  }, [router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,6 +79,14 @@ export default function NewUserPage() {
       setError('An error occurred. Please try again.')
       setLoading(false)
     }
+  }
+
+  if (authChecking) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    )
   }
 
   return (

@@ -3,6 +3,7 @@ import { Inter, Montserrat } from 'next/font/google'
 import './globals.css'
 import { LocalBusinessSchema } from '@/components/seo/LocalBusinessSchema'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
+import { GoogleMapsScript } from '@/components/maps/GoogleMapsScript'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -81,12 +82,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+
   return (
     <html lang="en">
       <head>
         <LocalBusinessSchema />
       </head>
       <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
+        {googleMapsApiKey && <GoogleMapsScript apiKey={googleMapsApiKey} />}
         <GoogleAnalytics />
         {children}
       </body>

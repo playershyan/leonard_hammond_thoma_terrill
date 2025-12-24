@@ -1,6 +1,7 @@
 import { Section, SectionTitle } from '@/components/ui'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { ContactForm } from '@/components/forms/ContactForm'
+import { GoogleMap } from '@/components/maps/GoogleMap'
 
 export const metadata = {
   title: 'Contact Us | Law Firm Name - Fort Wayne Attorneys',
@@ -87,29 +88,25 @@ export default function ContactPage() {
             <p className="text-text-light mb-6">
               Conveniently located in downtown Fort Wayne. Free parking available for clients.
             </p>
-            <div className="bg-gray-300 rounded-lg overflow-hidden" style={{ height: '400px' }}>
-              {/* Google Maps Embed - Replace with actual embed URL when available */}
-              <div className="w-full h-full flex items-center justify-center text-text-light">
-                <div className="text-center">
-                  <MapPin className="w-16 h-16 mx-auto mb-4 text-primary" />
-                  <p className="font-semibold">Google Maps will be embedded here</p>
-                  <p className="text-sm mt-2">
-                    Set NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL in environment variables
-                  </p>
+            <div className="bg-gray-300 rounded-lg overflow-hidden">
+              {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
+                <GoogleMap
+                  center={{ lat: 41.0793, lng: -85.1394 }} // Fort Wayne, IN coordinates
+                  zoom={15}
+                  mapId="DEMO_MAP_ID"
+                  height="400px"
+                />
+              ) : (
+                <div className="w-full h-[400px] flex items-center justify-center text-text-light">
+                  <div className="text-center">
+                    <MapPin className="w-16 h-16 mx-auto mb-4 text-primary" />
+                    <p className="font-semibold">Google Maps will be displayed here</p>
+                    <p className="text-sm mt-2">
+                      Set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY in environment variables
+                    </p>
+                  </div>
                 </div>
-              </div>
-              {/*
-              Uncomment and use this when you have the Google Maps embed URL:
-              <iframe
-                src={process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-              */}
+              )}
             </div>
           </div>
         </div>

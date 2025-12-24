@@ -18,9 +18,17 @@ export default function EditUserPage({ params }: { params: { id: string } }) {
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    // Fetch user data
-    const fetchUser = async () => {
+    // Check authentication and fetch user data
+    const initPage = async () => {
       try {
+        // Check auth first
+        const authResponse = await fetch('/api/auth/me')
+        if (!authResponse.ok) {
+          router.push('/admin/login')
+          return
+        }
+
+        // Fetch user data
         const response = await fetch(`/api/users/${params.id}`)
         if (!response.ok) {
           setError('User not found')
@@ -41,8 +49,8 @@ export default function EditUserPage({ params }: { params: { id: string } }) {
       }
     }
 
-    fetchUser()
-  }, [params.id])
+    initPage()
+  }, [params.id, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

@@ -9,50 +9,59 @@ export function Sidebar() {
   const pathname = usePathname()
 
   const navigation = [
-    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-    { name: 'Blog Posts', href: '/admin/blog', icon: FileText },
-    { name: 'Users', href: '/admin/users', icon: Users },
-    { name: 'My Profile', href: '/admin/profile', icon: User },
+    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard, exact: true },
+    { name: 'Blog Posts', href: '/admin/blog', icon: FileText, exact: false },
+    { name: 'Users', href: '/admin/users', icon: Users, exact: false },
+    { name: 'My Profile', href: '/admin/profile', icon: User, exact: true },
   ]
 
+  const isActive = (href: string, exact: boolean) => {
+    if (exact) {
+      return pathname === href
+    }
+    return pathname === href || pathname.startsWith(href + '/')
+  }
+
   return (
-    <aside className="w-64 bg-primary text-white min-h-screen">
-      <div className="p-6">
+    <aside className="w-64 bg-primary text-white min-h-screen flex flex-col shadow-xl sticky top-0">
+      <div className="p-6 pb-5 border-b border-white/10">
         <h2 className="text-2xl font-heading font-bold">Admin Panel</h2>
       </div>
 
-      <nav className="px-4 space-y-2">
+      <nav className="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto">
         {navigation.map((item) => {
           const Icon = item.icon
-          const isActive = pathname === item.href
+          const active = isActive(item.href, item.exact ?? false)
 
           return (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-4 py-3 rounded-md transition-colors',
-                isActive
-                  ? 'bg-white/10 text-white'
-                  : 'text-white/70 hover:bg-white/5 hover:text-white'
+                'flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200',
+                active
+                  ? 'bg-white/15 text-white shadow-sm font-medium'
+                  : 'text-white/75 hover:bg-white/10 hover:text-white'
               )}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="w-5 h-5 flex-shrink-0" />
               <span>{item.name}</span>
             </Link>
           )
         })}
+      </nav>
 
+      <div className="p-4 pt-3 border-t border-white/10">
         <form action="/api/auth/logout" method="POST">
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-md text-white/70 hover:bg-white/5 hover:text-white transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-white/75 hover:bg-white/10 hover:text-white transition-all duration-200"
           >
-            <LogOut className="w-5 h-5" />
+            <LogOut className="w-5 h-5 flex-shrink-0" />
             <span>Logout</span>
           </button>
         </form>
-      </nav>
+      </div>
     </aside>
   )
 }

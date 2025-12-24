@@ -4,6 +4,7 @@ import { eq } from 'drizzle-orm'
 import Link from 'next/link'
 import { FileText, Users, PenSquare, Eye } from 'lucide-react'
 import { Button } from '@/components/ui'
+import { requireAuth } from '@/lib/auth/validate'
 
 async function getDashboardStats() {
   try {
@@ -43,6 +44,7 @@ async function getDashboardStats() {
 }
 
 export default async function AdminDashboard() {
+  await requireAuth()
   const stats = await getDashboardStats()
 
   const statCards = [

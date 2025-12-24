@@ -94,9 +94,9 @@ export default function PracticeAreasPage() {
               >
                 {/* Icon */}
                 <div
-                  className={`w-16 h-16 ${area.color} rounded-lg flex items-center justify-center mb-6`}
+                  className="w-16 h-16 bg-white rounded-lg flex items-center justify-center mb-6 border-2 border-primary"
                 >
-                  <Icon className="w-8 h-8 text-white" />
+                  <Icon className="w-8 h-8 text-primary" />
                 </div>
 
                 {/* Title */}

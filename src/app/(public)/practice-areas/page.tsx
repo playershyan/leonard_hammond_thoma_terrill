@@ -24,7 +24,7 @@ export default function PracticeAreasPage() {
         'Prenuptial Agreements',
         'Adoption',
       ],
-      color: 'bg-blue-500',
+      color: 'bg-primary',
     },
     {
       icon: Scale,
@@ -40,7 +40,7 @@ export default function PracticeAreasPage() {
         'Wrongful Death',
         'Product Liability',
       ],
-      color: 'bg-green-500',
+      color: 'bg-primary',
     },
     {
       icon: ShieldCheck,
@@ -56,7 +56,7 @@ export default function PracticeAreasPage() {
         'White Collar Crimes',
         'Juvenile Defense',
       ],
-      color: 'bg-red-500',
+      color: 'bg-primary',
     },
   ]
 

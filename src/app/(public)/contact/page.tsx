@@ -91,7 +91,7 @@ export default function ContactPage() {
             <div className="rounded-lg overflow-hidden">
               {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
                 <LazyGoogleMap
-                  center={{ lat: 41.0793, lng: -85.1394 }} // Fort Wayne, IN coordinates
+                  center={{ lat: 41.079301164909324, lng: -85.13973198727524 }}
                   zoom={15}
                   mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}
                   height="400px"

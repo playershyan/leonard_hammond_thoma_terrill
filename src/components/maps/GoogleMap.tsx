@@ -27,6 +27,18 @@ export function GoogleMap({
   const [error, setError] = useState<string | null>(null)
   const initAttemptedRef = useRef(false)
 
+  // Store latest props in refs to avoid stale closures
+  const centerRef = useRef(center)
+  const zoomRef = useRef(zoom)
+  const markerTitleRef = useRef(markerTitle)
+
+  // Update refs when props change
+  useEffect(() => {
+    centerRef.current = center
+    zoomRef.current = zoom
+    markerTitleRef.current = markerTitle
+  }, [center, zoom, markerTitle])
+
   useEffect(() => {
     async function initMap() {
       // Prevent multiple initialization attempts
@@ -101,10 +113,11 @@ export function GoogleMap({
             }
 
             // Add a marker positioned at the map center
+            // Use refs to get latest values
             markerRef.current = new AdvancedMarkerElement({
               map: innerMap,
-              position: { lat: center.lat, lng: center.lng },
-              title: markerTitle,
+              position: { lat: centerRef.current.lat, lng: centerRef.current.lng },
+              title: markerTitleRef.current,
             })
 
             setIsLoading(false)

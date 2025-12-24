@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui'
 import { PenSquare } from 'lucide-react'
 import { BlogPostTable } from '@/components/admin/BlogPostTable'
+import { requireAuth } from '@/lib/auth/validate'
 
 async function getBlogPosts() {
   try {
@@ -17,6 +18,8 @@ async function getBlogPosts() {
 }
 
 export default async function AdminBlogPage() {
+  await requireAuth()
+
   const posts = await getBlogPosts()
 
   return (

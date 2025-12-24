@@ -5,6 +5,7 @@ import { db } from '@/lib/db/client'
 import { blogPosts } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { notFound } from 'next/navigation'
+import { requireAuth } from '@/lib/auth/validate'
 
 async function getBlogPost(id: string) {
   try {
@@ -17,6 +18,8 @@ async function getBlogPost(id: string) {
 }
 
 export default async function EditBlogPostPage({ params }: { params: { id: string } }) {
+  await requireAuth()
+
   const post = await getBlogPost(params.id)
 
   if (!post) {

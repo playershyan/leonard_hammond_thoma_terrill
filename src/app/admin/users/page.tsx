@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui'
 import { UserPlus } from 'lucide-react'
 import { UserTable } from '@/components/admin/UserTable'
+import { requireAuth } from '@/lib/auth/validate'
 
 async function getUsers() {
   try {
@@ -16,6 +17,8 @@ async function getUsers() {
 }
 
 export default async function UsersPage() {
+  await requireAuth()
+
   const allUsers = await getUsers()
   const canAddUser = allUsers.length < 3
 

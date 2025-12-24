@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { BlogPostForm } from '@/components/admin/BlogPostForm'
+import { requireAuth } from '@/lib/auth/validate'
 
-export default function NewBlogPostPage() {
+export default async function NewBlogPostPage() {
+  await requireAuth()
   return (
     <div>
       <div className="mb-8">

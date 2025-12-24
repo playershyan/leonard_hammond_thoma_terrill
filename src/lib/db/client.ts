@@ -3,7 +3,13 @@ import postgres from 'postgres'
 
 const connectionString = process.env.DATABASE_URL!
 
-// Disable prefetch for connection
-const client = postgres(connectionString, { prepare: false })
+// Configure client for Supabase pooler
+const client = postgres(connectionString, {
+  prepare: false,
+  ssl: 'require',
+  max: 1,
+  idle_timeout: 20,
+  connect_timeout: 10
+})
 
 export const db = drizzle(client)

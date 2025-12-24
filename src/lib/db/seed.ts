@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
+
 import { db } from './client'
 import { users } from './schema'
 import bcrypt from 'bcryptjs'

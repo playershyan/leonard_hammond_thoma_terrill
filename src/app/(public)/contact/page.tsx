@@ -1,7 +1,7 @@
 import { Section, SectionTitle } from '@/components/ui'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { ContactForm } from '@/components/forms/ContactForm'
-import { GoogleMap } from '@/components/maps/GoogleMap'
+import { LazyGoogleMap } from '@/components/maps'
 
 export const metadata = {
   title: 'Contact Us | Law Firm Name - Fort Wayne Attorneys',
@@ -88,13 +88,14 @@ export default function ContactPage() {
             <p className="text-text-light mb-6">
               Conveniently located in downtown Fort Wayne. Free parking available for clients.
             </p>
-            <div className="bg-gray-300 rounded-lg overflow-hidden">
+            <div className="rounded-lg overflow-hidden">
               {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
-                <GoogleMap
+                <LazyGoogleMap
                   center={{ lat: 41.0793, lng: -85.1394 }} // Fort Wayne, IN coordinates
                   zoom={15}
-                  mapId="DEMO_MAP_ID"
+                  mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID}
                   height="400px"
+                  markerTitle="Leonard, Hammond, Thoma & Terrill - Law Office"
                 />
               ) : (
                 <div className="w-full h-[400px] flex items-center justify-center text-text-light">

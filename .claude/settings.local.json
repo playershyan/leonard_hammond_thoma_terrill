@@ -9,7 +9,14 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(node -e:*)",
-      "Bash(npm run db:generate:*)"
+      "Bash(npm run db:generate:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(cat:*)",
+      "Bash(nslookup:*)",
+      "Bash(npm run dev:*)",
+      "Bash(del srcmiddleware.ts)",
+      "Bash(grep:*)"
     ]
   }
 }

@@ -75,9 +75,17 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-primary-light mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-300">
-              © {currentYear} Law Firm Name. All rights reserved.
-            </p>
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+              <p className="text-sm text-gray-300">
+                © {currentYear} Leonard, Hammond, Thoma & Terrill. All rights reserved.
+              </p>
+              <Link
+                href="/privacy-policy"
+                className="text-sm text-gray-300 hover:text-secondary transition-colors"
+              >
+                Privacy Policy
+              </Link>
+            </div>
 
             {/* Social Links */}
             <div className="flex gap-4">

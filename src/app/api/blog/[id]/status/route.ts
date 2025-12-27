@@ -5,8 +5,10 @@ import { eq } from 'drizzle-orm'
 import { getSession } from '@/lib/auth/session'
 
 // PATCH /api/blog/[id]/status - Toggle blog post status
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
+
     // Check authentication
     const session = await getSession()
     if (!session.isLoggedIn) {
@@ -24,7 +26,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     const [existingPost] = await db
       .select()
       .from(blogPosts)
-      .where(eq(blogPosts.id, params.id))
+      .where(eq(blogPosts.id, id))
       .limit(1)
 
     if (!existingPost) {
@@ -42,7 +44,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
             : existingPost.publishedAt,
         updatedAt: new Date(),
       })
-      .where(eq(blogPosts.id, params.id))
+      .where(eq(blogPosts.id, id))
       .returning()
 
     return NextResponse.json({ success: true, post: updatedPost })

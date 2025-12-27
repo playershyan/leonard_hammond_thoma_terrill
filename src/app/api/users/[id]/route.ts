@@ -7,10 +7,11 @@ import { hashPassword } from '@/lib/auth'
 // GET /api/users/[id] - Get single user
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const [user] = await db.select().from(users).where(eq(users.id, params.id)).limit(1)
+    const { id } = await params
+    const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1)
 
     if (!user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 })
@@ -28,9 +29,10 @@ export async function GET(
 // PUT /api/users/[id] - Update user
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await request.json()
     const { username, password } = body
 
@@ -38,7 +40,7 @@ export async function PUT(
     const [existingUser] = await db
       .select()
       .from(users)
-      .where(eq(users.id, params.id))
+      .where(eq(users.id, id))
       .limit(1)
 
     if (!existingUser) {
@@ -93,7 +95,7 @@ export async function PUT(
     const [updatedUser] = await db
       .update(users)
       .set(updateData)
-      .where(eq(users.id, params.id))
+      .where(eq(users.id, id))
       .returning()
 
     return NextResponse.json({
@@ -109,14 +111,16 @@ export async function PUT(
 // DELETE /api/users/[id] - Delete user
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+
     // Check if user exists
     const [existingUser] = await db
       .select()
       .from(users)
-      .where(eq(users.id, params.id))
+      .where(eq(users.id, id))
       .limit(1)
 
     if (!existingUser) {
@@ -133,7 +137,7 @@ export async function DELETE(
     }
 
     // Delete user
-    await db.delete(users).where(eq(users.id, params.id))
+    await db.delete(users).where(eq(users.id, id))
 
     return NextResponse.json({ success: true })
   } catch (error) {

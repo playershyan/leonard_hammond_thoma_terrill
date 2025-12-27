@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db/client'
 import { users } from '@/lib/db/schema'
+import { eq } from 'drizzle-orm'
 import { hashPassword } from '@/lib/auth'
 
 // GET /api/users - Get all users
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
     const existingUser = await db
       .select()
       .from(users)
-      .where((t) => t.username === username)
+      .where(eq(users.username, username))
       .limit(1)
 
     if (existingUser.length > 0) {

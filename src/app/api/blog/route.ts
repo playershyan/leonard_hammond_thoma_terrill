@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db/client'
 import { blogPosts } from '@/lib/db/schema'
+import { eq } from 'drizzle-orm'
 import { getSession } from '@/lib/auth/session'
 
 // GET /api/blog - Get all blog posts
@@ -48,7 +49,7 @@ export async function POST(request: NextRequest) {
     const [existingPost] = await db
       .select()
       .from(blogPosts)
-      .where((t) => t.slug === slug)
+      .where(eq(blogPosts.slug, slug))
       .limit(1)
 
     if (existingPost) {

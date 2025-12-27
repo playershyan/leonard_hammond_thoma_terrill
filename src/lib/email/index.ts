@@ -1,7 +1,8 @@
 import { Resend } from 'resend'
 
-// Initialize Resend with API key
-export const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend with API key (with fallback for build time)
+// The API key will be validated at runtime when emails are actually sent
+export const resend = new Resend(process.env.RESEND_API_KEY || 'build-time-placeholder')
 
 // Email configuration
 export const EMAIL_CONFIG = {

@@ -5,9 +5,10 @@ import { eq } from 'drizzle-orm'
 import { getSession } from '@/lib/auth/session'
 
 // GET /api/blog/[id] - Get single blog post
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.id, params.id)).limit(1)
+    const { id } = await params
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1)
 
     if (!post) {
       return NextResponse.json({ error: 'Blog post not found' }, { status: 404 })
@@ -21,8 +22,10 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 // PUT /api/blog/[id] - Update blog post
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
+
     // Check authentication
     const session = await getSession()
     if (!session.isLoggedIn) {
@@ -46,7 +49,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const [existingPost] = await db
       .select()
       .from(blogPosts)
-      .where(eq(blogPosts.id, params.id))
+      .where(eq(blogPosts.id, id))
       .limit(1)
 
     if (!existingPost) {
@@ -97,7 +100,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
             : null,
         updatedAt: new Date(),
       })
-      .where(eq(blogPosts.id, params.id))
+      .where(eq(blogPosts.id, id))
       .returning()
 
     return NextResponse.json({ success: true, post: updatedPost })
@@ -108,8 +111,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 }
 
 // DELETE /api/blog/[id] - Delete blog post
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params
+
     // Check authentication
     const session = await getSession()
     if (!session.isLoggedIn) {
@@ -120,7 +125,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     const [existingPost] = await db
       .select()
       .from(blogPosts)
-      .where(eq(blogPosts.id, params.id))
+      .where(eq(blogPosts.id, id))
       .limit(1)
 
     if (!existingPost) {
@@ -128,7 +133,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     // Delete blog post
-    await db.delete(blogPosts).where(eq(blogPosts.id, params.id))
+    await db.delete(blogPosts).where(eq(blogPosts.id, id))
 
     return NextResponse.json({ success: true })
   } catch (error) {

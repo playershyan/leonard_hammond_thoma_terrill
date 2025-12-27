@@ -3,6 +3,22 @@
 import { useEffect, useRef, useState } from 'react'
 import { Loader2 } from 'lucide-react'
 
+// Declare custom element for TypeScript
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'gmp-map': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & {
+          center?: string
+          zoom?: string
+          'map-id'?: string
+        },
+        HTMLElement
+      >
+    }
+  }
+}
+
 interface GoogleMapProps {
   center: { lat: number; lng: number }
   zoom?: number
@@ -162,6 +178,7 @@ export function GoogleMap({
 
   return (
     <div className={`relative ${className}`} style={{ height }}>
+      {/* @ts-expect-error - gmp-map is a custom Google Maps element */}
       <gmp-map
         ref={mapRef}
         center={`${center.lat},${center.lng}`}

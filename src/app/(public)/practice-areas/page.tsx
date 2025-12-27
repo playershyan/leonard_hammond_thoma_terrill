@@ -78,10 +78,6 @@ export default function PracticeAreasPage() {
       <Section variant="gray">
         <div className="text-center mb-12">
           <SectionTitle>Areas of Legal Expertise</SectionTitle>
-          <p className="text-xl text-text-light max-w-3xl mx-auto">
-            Our attorneys have decades of combined experience providing effective legal solutions
-            for individuals and families
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

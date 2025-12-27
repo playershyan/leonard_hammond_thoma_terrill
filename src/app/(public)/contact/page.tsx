@@ -85,9 +85,6 @@ export default function ContactPage() {
           {/* Google Maps */}
           <div>
             <h2 className="text-3xl font-heading font-bold text-primary mb-6">Visit Our Office</h2>
-            <p className="text-text-light mb-6">
-              Conveniently located in downtown Fort Wayne. Free parking available for clients.
-            </p>
             <div className="rounded-lg overflow-hidden">
               {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
                 <LazyGoogleMap

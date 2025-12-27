@@ -48,46 +48,49 @@ export async function BlogPreview() {
         Stay informed with our expert legal blogs
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div className="relative h-48 bg-gray-200">
-              {post.featuredImageUrl && (
-                <Image
-                  src={post.featuredImageUrl}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                />
-              )}
-            </div>
-            <div className="p-6">
-              {post.publishedAt && (
-                <div className="flex items-center gap-2 text-sm text-text-light mb-3">
-                  <Calendar className="w-4 h-4" />
-                  <time dateTime={post.publishedAt.toISOString()}>
-                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                </div>
-              )}
-              <h3 className="text-xl font-semibold text-primary mb-2 line-clamp-2">
-                {post.title}
-              </h3>
-              {post.excerpt && (
-                <p className="text-text-light text-sm mb-4 line-clamp-3">{post.excerpt}</p>
-              )}
-              <span className="text-primary font-semibold">Read More →</span>
-            </div>
-          </Link>
-        ))}
+      {/* Mobile: Horizontal scrollable, Desktop: Grid */}
+      <div className="mb-8">
+        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible pb-4 px-4 md:px-0 md:pb-0 -mx-4 md:mx-0 snap-x snap-mandatory md:snap-none scrollbar-hide">
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink snap-start bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="relative h-48 bg-gray-200">
+                {post.featuredImageUrl && (
+                  <Image
+                    src={post.featuredImageUrl}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
+                )}
+              </div>
+              <div className="p-6">
+                {post.publishedAt && (
+                  <div className="flex items-center gap-2 text-sm text-text-light mb-3">
+                    <Calendar className="w-4 h-4" />
+                    <time dateTime={post.publishedAt.toISOString()}>
+                      {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                  </div>
+                )}
+                <h3 className="text-xl font-semibold text-primary mb-2 line-clamp-2">
+                  {post.title}
+                </h3>
+                {post.excerpt && (
+                  <p className="text-text-light text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+                )}
+                <span className="text-primary font-semibold">Read More →</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="text-center">
